@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Perfumería Clau</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff5f7;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #ff4d6d;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .producto {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s ease;
+      padding-bottom: 15px;
+    }
+    .producto:hover {
+      transform: scale(1.03);
+    }
+    .producto img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      background: #fafafa;
+    }
+    .producto h3 {
+      margin: 10px 0 5px;
+      color: #333;
+    }
+    .producto p {
+      color: #777;
+      margin: 5px 0;
+    }
+    .precio {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff4d6d;
+    }
+    .precio-original {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💝 Catálogo Perfumería Clau 💝</h1>
+    <p>Fragancias Amor y Amistad – Calidad 1.1</p>
+  </header>
+
+  <section class="catalogo">
+    <!-- Ejemplo producto con descuento -->
+    <div class="producto" data-precio="110000" data-descuento="20">
+      <img src="perry-ellis.jpg" alt="Perry Ellis 360° For Women">
+      <h3>Perry Ellis 360° For Women</h3>
+      <p>100 ml</p>
+      <p>
+        <span class="precio-original"></span>
+        <span class="precio"></span>
+      </p>
+    </div>
+
+    <!-- Otro producto sin descuento -->
+    <div class="producto" data-precio="110000" data-descuento="0">
+      <img src="paco-rabanne.jpg" alt="Paco Rabanne 1 Million">
+      <h3>Paco Rabanne 1 Million</h3>
+      <p>100 ml</p>
+      <p>
+        <span class="precio-original"></span>
+        <span class="precio"></span>
+      </p>
+    </div>
+
+    <!-- Agrega más perfumes copiando bloques como este -->
+    <div class="producto" data-precio="120000" data-descuento="15">
+      <img src="moschino-bubble.jpg" alt="Moschino Toy 2 Bubble Gum">
+      <h3>Moschino Toy 2 Bubble Gum</h3>
+      <p>100 ml</p>
+      <p>
+        <span class="precio-original"></span>
+        <span class="precio"></span>
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Script para calcular precios con descuentos
+    document.querySelectorAll(".producto").forEach(producto => {
+      const precioBase = parseInt(producto.dataset.precio);
+      const descuento = parseInt(producto.dataset.descuento);
+      const precioDescuento = precioBase - (precioBase * descuento / 100);
+
+      const precioOriginalEl = producto.querySelector(".precio-original");
+      const precioFinalEl = producto.querySelector(".precio");
+
+      if (descuento > 0) {
+        precioOriginalEl.textContent = "$" + precioBase.toLocaleString("es-CO") + " COP";
+        precioFinalEl.textContent = "$" + precioDescuento.toLocaleString("es-CO") + " COP (-" + descuento + "%)";
+      } else {
+        precioOriginalEl.textContent = "";
+        precioFinalEl.textContent = "$" + precioBase.toLocaleString("es-CO") + " COP";
+      }
+    });
+  </script>
+</body>
+</html>
